@@ -1,0 +1,160 @@
+<html>
+    <head>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    </head>
+    <body>
+        <h>請選擇學院</h>
+        <div id="DropDownList">
+            <select id="SelectCategory"></select><br><br>
+           <select id="SelectSubCategory"></select><br>
+        </div>
+ 
+        <script type="text/javascript">
+   
+            $(document).ready(function()
+            {
+                Page_Init();
+            });
+ 
+            function Page_Init()
+            {
+                var jsonData =
+                [
+                    {
+                        "categoryId": "1",
+                        "categoryName": "商學院"
+                    },
+                    {
+                        "categoryId": "2",
+                        "categoryName": "工學院"
+                    },
+                    {
+                        "categoryId": "3",
+                        "categoryName": "資電學院"
+                    },
+                    {
+                        "categoryId": "4",
+                        "categoryName": "建設學院"
+                    },
+                    {
+                        "categoryId": "5",
+                        "categoryName": "理學院"
+                    }
+
+                ];
+ 
+               $('#SelectCategory').empty().append($('<option></option>').val('').text('------'));
+ 
+                $.each(jsonData, function (i, item)
+                {
+                    $('#SelectCategory').append($('<option></option>').val(item.categoryId).text(item.categoryName));
+                });    
+ 
+                $('#SelectSubCategory').empty().append($('<option></option>').val('').text('------'));  
+            
+                $('#SelectCategory').change(function(){
+                    ChangeCategory();
+                });
+ 
+          
+            }
+ 
+                
+ 
+            function ChangeCategory()
+            {
+                //變動第一個下拉選單
+ 
+                $('#SelectSubCategory').empty().append($('<option></option>').val('').text('------'));
+                           
+ 
+                var categoryId = $.trim($('#SelectCategory option:selected').val());
+                
+                var jsonData = [];
+                
+                if(categoryId == '1')
+                {
+                    jsonData =
+                    [
+                        {
+                            "subCategoryName": "會計系"
+                        },
+                        {
+                            "subCategoryName": "統計系"
+                        }
+                    ];
+                }
+                else if(categoryId == '2')
+                {
+                    jsonData =
+                    [
+                        {
+                            "subCategoryName": "化工系"
+                        },
+                        {
+                            "subCategoryName": "航太系"
+                        }
+                    ];                
+                }
+                else if(categoryId == '3')
+                {
+                    jsonData =
+                    [      
+                        {
+                            "subCategoryName": "資工系"
+                        },
+                        {
+                            "subCategoryName": "通訊系"
+                        },
+                        {
+                            "subCategoryName": "電機系"
+                        }
+                    ];                
+                }
+                else if(categoryId == '4')
+                {
+                    jsonData =
+                    [
+                        {
+                            "subCategoryName": "土木系"
+                        },
+                        {
+                            "subCategoryName": "都資系"
+                        },
+                        {
+                            "subCategoryName": "土管系"
+                        }
+                    ];                
+                } 
+                else if(categoryId == '5')
+                {
+                    jsonData =
+                    [
+                        {
+                            "subCategoryName": "光電學系"
+                        },
+                        {
+                            "subCategoryName": "應用數學系"
+                        },
+                        {
+                            "subCategoryName": "環工系"
+                        }
+                    ];                
+                }           
+                
+                if(categoryId.length != 0)
+                {
+                    $.each(jsonData , function(i, item){
+                        $('#SelectSubCategory').append($('<option></option>').val(item.subCategoryId).text(item.subCategoryName));
+                    });
+   
+                }
+            }
+ 
+            
+        
+        </script>     
+    </body>
+</html>
